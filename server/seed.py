@@ -12,12 +12,12 @@ if __name__ == '__main__':
 
         print("🔮 Seeding subjects...")
         subjects = [
-            Subject(name="Defense Against the Dark Arts"),
-            Subject(name="Herbology"),
-            Subject(name="Divination"),
-            Subject(name="Care of Magical Creatures"),
-            Subject(name="Charms"),
-            Subject(name="Ancient Runes"),
+            Subject(title="Defense Against the Dark Arts"),
+            Subject(title="Herbology"),
+            Subject(title="Divination"),
+            Subject(title="Care of Magical Creatures"),
+            Subject(title="Charms"),
+            Subject(title="Ancient Runes"),
 
         ]
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
         for subject in subjects:
             student = rc(students)
             subject_enrollments.append(
-                SubjectEnrollment(subject=subject, student=student, price = randrange(1996, 2003))
+                SubjectEnrollment(subject=subject, student=student, enrollment_year = randrange(1996, 2003))
             )
         db.session.add_all(subject_enrollments)
         db.session.commit()

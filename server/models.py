@@ -10,12 +10,12 @@ metadata = MetaData(naming_convention={
 
 db = SQLAlchemy(metadata=metadata)
 
-
 class Student(db.Model, SerializerMixin):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
+    age = db.Column(db.String)
 
     # Add relationship
     
@@ -27,7 +27,6 @@ class Student(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'<Student {self.id}>'
-
 
 class Subject(db.Model, SerializerMixin):
     __tablename__ = 'subjects'
@@ -41,7 +40,6 @@ class Subject(db.Model, SerializerMixin):
     
     def __repr__(self):
         return f'<Subject {self.id}>'
-
 
 class SubjectEnrollment(db.Model, SerializerMixin):
     __tablename__ = 'subject_enrollments'

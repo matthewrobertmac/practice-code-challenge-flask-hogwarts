@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-
-from models import db, Sweet, Vendor, VendorSweet
+from models import db, Student, Subject, SubjectEnrollment
 from flask_migrate import Migrate
 from flask import Flask, request, make_response
 from flask_restful import Api, Resource
@@ -21,7 +20,7 @@ db.init_app(app)
 
 @app.route('/')
 def home():
-    return '<h1>Code challenge</h1>'
+    return '<h1>🔮 Hogwarts Classes</h1>'
 
 
 if __name__ == '__main__':
