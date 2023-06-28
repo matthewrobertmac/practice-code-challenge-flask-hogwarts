@@ -35,14 +35,14 @@ if __name__ == '__main__':
 
         db.session.add_all(students)
 
-        print("📚 Seeding class enrollments...")
-        subject_enrollments = []
-        for subject in subjects:
-            student = rc(students)
-            subject_enrollments.append(
-                SubjectEnrollment(subject=subject, student=student, enrollment_year = randrange(1996, 2003))
-            )
-        db.session.add_all(subject_enrollments)
+        # print("📚 Seeding subject enrollments...")
+        # subject_enrollments = []
+        # for subject in subjects:
+        #     student = rc(students)
+        #     subject_enrollments.append(
+        #         SubjectEnrollment(subject=subject, student=student, enrollment_year = randrange(1996, 2003))
+        #     )
+        # db.session.add_all(subject_enrollments)
         db.session.commit()
 
         print("⚡️ Done seeding!")

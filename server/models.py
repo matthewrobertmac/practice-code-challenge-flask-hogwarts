@@ -18,10 +18,19 @@ class Student(db.Model, SerializerMixin):
     age = db.Column(db.String)
 
     # Add relationship
+
+    subject_enrollments = db.relationship('SubjectEnrollment', backref='students', cascade="all, delete-orphan")
     
     # Add serialization
+    serialize_only = ('id', 'name', 'age')
 
     # Add validation
+    @validates('age') 
+    def validate_age(self, key, age):
+        if not (11 <= int(age) <= 18):
+            raise ValueError("age must be between 11 and 18")
+        else:
+            return age
 
     
     
@@ -35,8 +44,10 @@ class Subject(db.Model, SerializerMixin):
     title = db.Column(db.String)
 
     # Add relationship
-    
+    subject_enrollments = db.relationship('SubjectEnrollment', backref='subjects', cascade="all, delete-orphan")
+
     # Add serialization
+    serialize_only = ('id', 'title') 
     
     def __repr__(self):
         return f'<Subject {self.id}>'
@@ -46,12 +57,23 @@ class SubjectEnrollment(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     enrollment_year = db.Column(db.Integer, nullable=False)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
+    subject_id = db.Column(db.Integer, db.ForeignKey('subjects.id')) 
 
     # Add relationships
+    #students = db.relationship('Student', 'subject_enrollment')
+    #subjects = db.relationship('Subject', 'subject_enrollment')
     
     # Add serialization
+    serialize_only = ('id', 'enrollment_year', 'student_id', 'subject_id') 
     
     # Add validation
+    @validates('enrollment_year')
+    def validate_enrollment_year(self, key, enrollment_year):
+        if not enrollment_year < 2023:
+            raise ValueError("enrollment must be before 2023")
+        else:
+            return enrollment_year
     
     def __repr__(self):
         return f'<SubjectEnrollment {self.id}>'
